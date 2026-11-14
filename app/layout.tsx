@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { Calculator, Radar } from "lucide-react";
+import { validGaId } from "@/lib/analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const gaId = validGaId(process.env.NEXT_PUBLIC_GA_ID);
   return (
     <html lang="ko">
       <body>
@@ -33,6 +37,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <Link href="/calculator/">사업비 계산기</Link>
           </div>
         </footer>
+        <Analytics />
+        {gaId && (
+          <>
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+              window.gtag = function () { window.dataLayer.push(arguments); };
+              window.gtag('js', new Date());
+              window.gtag('config', ${JSON.stringify(gaId)});`}
+            </Script>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+          </>
+        )}
       </body>
     </html>
   );

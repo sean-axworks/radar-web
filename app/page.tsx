@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Building2, Calculator, FileText, Radio, Send } from "lucide-react";
 import { channels, formatDeadline, noticePath, notices } from "@/lib/notices";
 import { NoticeTabs } from "@/components/notice-tabs";
+import { TrackedSourceLink } from "@/components/tracked-source-link";
 
 export default function Home() {
   const highlights = [
@@ -71,9 +72,9 @@ export default function Home() {
               <h2>텔레그램 공고 알림</h2>
               <p>관심 있는 공고를 채널에서 받아보세요.</p>
               {Object.values(channels).map((channel) => (
-                <a className="channel-link" key={channel.name} href={channel.url} target="_blank" rel="noopener noreferrer">
+                <TrackedSourceLink className="channel-link" key={channel.name} href={channel.url} sourceType="telegram_channel">
                   {channel.name} <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
+                </TrackedSourceLink>
               ))}
             </div>
             <Link className="card side-card side-calculator" href="/calculator/">

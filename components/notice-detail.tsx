@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, CalendarDays } from "lucide-react";
 import { BudgetCalculator } from "@/components/budget-calculator";
+import { TrackedSourceLink } from "@/components/tracked-source-link";
 import { channels, formatDeadline, notices, type NoticeKind } from "@/lib/notices";
 
 export type DetailProps = { params: Promise<{ id: string }> };
@@ -44,11 +45,12 @@ export async function NoticeDetail({ kind, params }: DetailProps & { kind: Notic
         <ul className="summary-list">
           {notice.summary_3lines.map((line) => <li key={line}>{line}</li>)}
         </ul>
-        <a className="button button-outline" href={notice.source_url} target="_blank" rel="noopener noreferrer">
+        <TrackedSourceLink className="button button-outline" href={notice.source_url} sourceType="notice_original">
           {notice.source_is_listing ? "공식 공고 사이트" : "공고 원문 보기"} <ArrowUpRight size={17} aria-hidden="true" />
-        </a>
+        </TrackedSourceLink>
       </article>
       <BudgetCalculator preset={{
+        id: notice.id,
         amount: notice.max_grant_amount,
         government: notice.gov_ratio === null ? null : Number((notice.gov_ratio * 100).toFixed(2)),
         cash: notice.cash_ratio === null ? null : Number((notice.cash_ratio * 100).toFixed(2)),

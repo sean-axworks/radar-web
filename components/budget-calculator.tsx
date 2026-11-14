@@ -1,13 +1,15 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Calculator, Download, Info } from "lucide-react";
+import { trackCalculatorUse, trackEvent } from "@/lib/analytics";
 import { calculateBudget, disclaimer, vatNote, type BudgetInputs } from "@/lib/budget";
 
 const formatter = new Intl.NumberFormat("ko-KR");
 const displayWon = (value: number) => `${formatter.format(value)}원`;
 
 type Preset = {
+  id: string;
   amount: number | null;
   government: number | null;
   cash: number | null;
@@ -29,11 +31,24 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
   });
   const [exporting, setExporting] = useState(false);
   const [exportError, setExportError] = useState("");
+  const hasEditedInput = useRef(false);
   const { values, error } = calculateBudget(input);
   const cap = preset && !preset.bid ? preset.amount : null;
   const exceedsCap = cap !== null && values && values.government > cap;
+  const noticeId = preset?.id ?? "(none)";
+  const noticeTitle = preset?.title ?? "범용 계산기";
+
+  useEffect(() => {
+    if (!hasEditedInput.current || !calculateBudget(input).values) return;
+    const timer = window.setTimeout(() => {
+      trackCalculatorUse(window.location.pathname, { notice_id: noticeId, notice_title: noticeTitle });
+    }, 500);
+    return () => window.clearTimeout(timer);
+  }, [input, noticeId, noticeTitle]);
 
   function update(key: Exclude<keyof BudgetInputs, "mode">, value: string) {
+    if (value === input[key]) return;
+    hasEditedInput.current = true;
     setInput((current) => ({ ...current, [key]: value }));
   }
 
@@ -48,6 +63,11 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
 
   async function exportWorkbook() {
     if (!values || exporting) return;
+    trackEvent("excel_download", {
+      notice_id: noticeId,
+      notice_title: noticeTitle,
+      total_budget: values.total,
+    });
     setExporting(true);
     setExportError("");
     try {
