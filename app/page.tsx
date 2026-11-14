@@ -53,7 +53,7 @@ export default function Home() {
                 </div>
                 <div className="highlight-meta">
                   <strong>{notice.budget_text}</strong>
-                  <time dateTime={notice.deadline}>마감 {formatDeadline(notice.deadline)}</time>
+                  {notice.deadline ? <time dateTime={notice.deadline}>마감 {formatDeadline(notice.deadline)}</time> : <span>마감 원문 확인</span>}
                 </div>
               </Link>
             ))}

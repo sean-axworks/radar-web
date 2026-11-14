@@ -8,9 +8,9 @@ const formatter = new Intl.NumberFormat("ko-KR");
 const displayWon = (value: number) => `${formatter.format(value)}원`;
 
 type Preset = {
-  amount: number;
-  government: number;
-  cash: number;
+  amount: number | null;
+  government: number | null;
+  cash: number | null;
   title: string;
   bid: boolean;
 };
@@ -19,10 +19,10 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
   const headingId = useId();
   const errorId = useId();
   const [input, setInput] = useState<BudgetInputs>({
-    mode: preset && !preset.bid ? "government" : "total",
-    amount: formatter.format(preset?.amount ?? 100000000),
-    government: String(preset?.government ?? 75),
-    cash: String(preset?.cash ?? 10),
+    mode: preset && !preset.bid && preset.amount !== null ? "government" : "total",
+    amount: preset ? (preset.amount === null ? "" : formatter.format(preset.amount)) : formatter.format(100000000),
+    government: preset ? String(preset.government ?? "") : "75",
+    cash: preset ? String(preset.cash ?? "") : "10",
     labor: "40",
     indirect: "5",
     directBase: "",
@@ -30,7 +30,8 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
   const [exporting, setExporting] = useState(false);
   const [exportError, setExportError] = useState("");
   const { values, error } = calculateBudget(input);
-  const exceedsCap = preset && !preset.bid && values && values.government > preset.amount;
+  const cap = preset && !preset.bid ? preset.amount : null;
+  const exceedsCap = cap !== null && values && values.government > cap;
 
   function update(key: Exclude<keyof BudgetInputs, "mode">, value: string) {
     setInput((current) => ({ ...current, [key]: value }));
@@ -64,8 +65,8 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
       <h2 id={headingId} className="calculator-heading"><Calculator size={23} aria-hidden="true" /> 사업비 시뮬레이션</h2>
       {preset && <p className="calculator-note">
         {preset.bid
-          ? "입찰 추정가격을 총사업비에 적용했습니다. 지원비율 100%·현금비율 0%는 비교 계산용 가정이며, 실제 계약 조건은 입찰 원문을 확인하세요."
-          : "등록된 지원금 상한과 부담 비율을 기본값으로 적용했습니다."}
+          ? "부가세 제외 추정가격이 확인되면 총사업비에 적용합니다. 지원비율 100%·현금비율 0%는 비교 계산용 가정입니다."
+          : "확인된 지원금 상한과 부담 비율을 기본값으로 적용했습니다. 빈 항목은 공고 원문을 확인해 입력하세요."}
       </p>}
       <div className="calculator-grid">
         <div className="card calculator-panel">
@@ -103,7 +104,7 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
           </label>
           <p className="field-help">민간현금비율은 민간부담금 대비입니다. 간접비율 5%는 예시이며, 공고에 따른 직접비와 비율을 입력하세요.</p>
           {error && <p id={errorId} className="field-error" role="status">{error}</p>}
-          {exceedsCap && <p className="field-error" role="status">정부지원금이 공고 상한 {displayWon(preset.amount)}을 초과합니다.</p>}
+          {exceedsCap && <p className="field-error" role="status">정부지원금이 공고 상한 {displayWon(cap)}을 초과합니다.</p>}
         </div>
         <div className="card calculator-panel result-panel">
           <h3>계산 결과</h3>

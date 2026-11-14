@@ -7,11 +7,11 @@ export type Notice = {
   title: string;
   agency: string;
   category: string;
-  deadline: string;
+  deadline: string | null;
   budget_text: string;
-  max_grant_amount: number;
-  gov_ratio: number;
-  cash_ratio: number;
+  max_grant_amount: number | null;
+  gov_ratio: number | null;
+  cash_ratio: number | null;
   summary_3lines: string[];
   source_url: string;
   created_at: string;
@@ -27,7 +27,8 @@ export const channels = {
 
 export const noticePath = (kind: NoticeKind, id: string) => `/${kind}/${id}/`;
 
-export function formatDeadline(value: string) {
+export function formatDeadline(value: string | null) {
+  if (value === null) return "원문 확인";
   const [date, time] = value.split("T");
   return date.replaceAll("-", ".") + (time ? ` ${time.slice(0, 5)} KST` : "");
 }

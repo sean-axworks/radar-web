@@ -52,7 +52,7 @@ export function NoticeTabs({ notices }: { notices: Record<NoticeKind, Notice[]> 
                     <p>{notice.agency}</p>
                     <div className="notice-meta">
                       <strong>{notice.budget_text}</strong>
-                      <span><CalendarDays size={14} aria-hidden="true" /><time dateTime={notice.deadline}>{formatDeadline(notice.deadline)}</time></span>
+                      <span><CalendarDays size={14} aria-hidden="true" />{notice.deadline ? <time dateTime={notice.deadline}>{formatDeadline(notice.deadline)}</time> : "마감 원문 확인"}</span>
                     </div>
                   </div>
                   <ArrowUpRight className="card-arrow shrink-0" size={18} aria-hidden="true" />

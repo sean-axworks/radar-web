@@ -38,7 +38,7 @@ export async function NoticeDetail({ kind, params }: DetailProps & { kind: Notic
         <p className="detail-agency">{notice.agency}</p>
         <div className="detail-meta">
           <strong>{notice.budget_text}</strong>
-          <span><CalendarDays size={16} aria-hidden="true" /> 마감 <time dateTime={notice.deadline}>{formatDeadline(notice.deadline)}</time></span>
+          <span><CalendarDays size={16} aria-hidden="true" /> 마감 {notice.deadline ? <time dateTime={notice.deadline}>{formatDeadline(notice.deadline)}</time> : "원문 확인"}</span>
         </div>
         <h2>공고 3줄 요약</h2>
         <ul className="summary-list">
@@ -50,8 +50,8 @@ export async function NoticeDetail({ kind, params }: DetailProps & { kind: Notic
       </article>
       <BudgetCalculator preset={{
         amount: notice.max_grant_amount,
-        government: Number((notice.gov_ratio * 100).toFixed(2)),
-        cash: Number((notice.cash_ratio * 100).toFixed(2)),
+        government: notice.gov_ratio === null ? null : Number((notice.gov_ratio * 100).toFixed(2)),
+        cash: notice.cash_ratio === null ? null : Number((notice.cash_ratio * 100).toFixed(2)),
         title: notice.title,
         bid: kind === "bids",
       }} />
