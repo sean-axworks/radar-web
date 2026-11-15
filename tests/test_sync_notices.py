@@ -46,12 +46,39 @@ class WebSyncTest(unittest.TestCase):
         self.assertEqual(self.git(self.site, "log", "-1", "--format=%s").strip(), "chore: daily radar update")
         self.assertEqual(self.git(self.site, "rev-parse", "HEAD"), self.git(self.remote, "rev-parse", "main"))
 
+    def test_unstaged_unrelated_change_does_not_block_dataset_push(self):
+        scratch = self.site / "notes.txt"
+        scratch.write_text("original", encoding="utf-8")
+        self.git(self.site, "add", "notes.txt")
+        self.git(self.site, "commit", "-m", "Add notes fixture")
+        self.git(self.site, "push", "origin", "main")
+        scratch.write_text("local edit", encoding="utf-8")
+        self.assertEqual(self.sync([self.row])["pushed"], 1)
+        self.assertEqual(scratch.read_text(encoding="utf-8"), "local edit")
+        self.assertEqual(self.git(self.remote, "show", "main:notes.txt").strip(), "original")
+
+    def test_local_dataset_edit_is_preserved_and_batch_stays_pending(self):
+        local = '[{"id": "local-change"}]'
+        self.data.write_text(local, encoding="utf-8")
+        self.assertEqual(self.sync([self.row])["status"], "pending")
+        self.assertEqual(self.data.read_text(encoding="utf-8"), local)
+        self.assertEqual(self.git(self.remote, "log", "main", "-1", "--format=%s").strip(), "Fixture")
+
     def test_failed_push_leaves_commit_to_retry_without_recollecting(self):
         self.git(self.site, "remote", "set-url", "--push", "origin", str(self.root / "unavailable"))
         self.assertEqual(self.sync([self.row])["status"], "pending")
         self.git(self.site, "remote", "set-url", "--push", "origin", str(self.remote))
         self.assertEqual(self.sync([])["pushed"], 1)
         self.assertEqual(self.git(self.site, "rev-parse", "HEAD"), self.git(self.remote, "rev-parse", "main"))
+
+    def test_unrelated_staged_edit_does_not_block_or_leak_into_update(self):
+        notes = self.site / "notes.txt"
+        notes.write_text("local notes", encoding="utf-8")
+        self.git(self.site, "add", "notes.txt")
+        self.assertEqual(self.sync([self.row])["pushed"], 1)
+        self.assertEqual(self.git(self.site, "diff", "--cached", "--name-only").strip(), "notes.txt")
+        self.assertEqual(self.git(self.remote, "show", "--format=", "--name-only", "main").strip(),
+                         "data/grants.json")
 
     def test_unrelated_pending_commit_is_not_published_and_batch_is_retried(self):
         (self.site / "private.txt").write_text("fixture", encoding="utf-8")

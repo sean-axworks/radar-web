@@ -82,19 +82,21 @@ def merge_rows(existing, incoming):
 def update_checkout(connection, kind, upstream):
     if git("branch", "--show-current") != "main" or git("rev-parse", "--show-prefix"):
         raise ValueError("Expected radar-web root on main")
-    if git("status", "--porcelain", "--untracked-files=no"):
-        raise ValueError("Tracked changes in radar-web need review")
+    path = Path("data") / f"{kind}.json"
+    if git("status", "--porcelain", "--", path.as_posix()):
+        raise ValueError(f"Local changes to {path.as_posix()} need review")
+    upstream_head = git("rev-parse", upstream)
+    local_head = git("rev-parse", "HEAD")
     ahead = git("rev-list", "--reverse", f"{upstream}..HEAD").splitlines()
     for commit in ahead:
         paths = git("diff-tree", "--no-commit-id", "--name-only", "-r", commit).splitlines()
         if (git("show", "-s", "--format=%s", commit) != MESSAGE or not paths
                 or not set(paths) <= DATA_PATHS):
             raise ValueError("Unrelated local commits need review")
-    if not ahead:
+    if not ahead and local_head != upstream_head:
         git("merge", "--ff-only", upstream)
-    elif git("merge-base", upstream, "HEAD") != git("rev-parse", upstream):
+    elif ahead and git("merge-base", upstream, "HEAD") != upstream_head:
         raise ValueError("Local updates diverged from origin/main")
-    path = Path("data") / f"{kind}.json"
     pending = [json.loads(row[0]) for row in connection.execute(
         "SELECT payload FROM queue WHERE kind = ? ORDER BY rowid DESC", (kind,)
     )]
