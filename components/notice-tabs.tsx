@@ -39,6 +39,9 @@ export function NoticeTabs({ notices }: { notices: Record<NoticeKind, Notice[]> 
       </div>
       {kinds.map((kind) => (
         <div key={kind} role="tabpanel" id={`panel-${kind}`} aria-labelledby={`tab-${kind}`} hidden={active !== kind}>
+          {kind === "grants" && notices.grants.length === 0 && (
+            <p className="p-5 text-sm text-slate-600">현재 목록에 표시할 국책과제가 없습니다.</p>
+          )}
           <ul className="notice-list">
             {notices[kind].map((notice) => (
               <li key={notice.id}>
