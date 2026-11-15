@@ -38,7 +38,6 @@ export default function Home() {
         <section aria-labelledby="highlights">
           <div className="section-heading">
             <h2 id="highlights">오늘의 주요 공고</h2>
-            <span className="sample-note">샘플 데이터</span>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {highlights.map(({ kind, notice, icon: Icon }) => (
