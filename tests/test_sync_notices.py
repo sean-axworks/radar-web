@@ -5,7 +5,23 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve().parents[1] / "tools" / "sync_notices.py"
+from tools.sync_notices import DATASETS, read_rows, valid_notice
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "tools" / "sync_notices.py"
+
+
+class PublishedNoticeDataTest(unittest.TestCase):
+    def test_published_data_matches_sync_schema_and_has_unique_ids(self):
+        for kind in DATASETS:
+            with self.subTest(kind=kind):
+                rows = read_rows((ROOT / "data" / f"{kind}.json").read_text(encoding="utf-8"))
+                seen = set()
+                for row in rows:
+                    self.assertTrue(valid_notice(row), f"Invalid notice: {row['id']}")
+                    self.assertRegex(row["id"], r"^[a-z0-9][a-z0-9-]{0,160}$")
+                    self.assertNotIn(row["id"], seen)
+                    seen.add(row["id"])
 
 
 class WebSyncTest(unittest.TestCase):

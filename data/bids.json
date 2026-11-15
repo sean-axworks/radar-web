@@ -70,45 +70,5 @@
     ],
     "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01826833&bidPbancOrd=000",
     "created_at": "2026-11-13"
-  },
-  {
-    "id": "public-data-platform",
-    "title": "공공데이터 통합 플랫폼 운영 및 고도화",
-    "agency": "나라장터 · 용역 예시",
-    "category": "용역·정보화",
-    "deadline": "2026-12-02",
-    "budget_text": "배정예산 예시 12억 원",
-    "max_grant_amount": 1090909090,
-    "gov_ratio": 1,
-    "cash_ratio": 0,
-    "summary_3lines": [
-      "공공데이터 플랫폼의 운영과 기능 개선을 가정한 입찰 예시입니다.",
-      "배정예산 12억 원과 부가세 제외 추정가격을 예시로 표시합니다.",
-      "실제 참가 조건과 제출 서류는 나라장터의 해당 공고에서 확인하세요."
-    ],
-    "source_url": "https://www.g2b.go.kr/",
-    "created_at": "2026-11-10",
-    "is_demo": true,
-    "source_is_listing": true
-  },
-  {
-    "id": "smart-facility-equipment",
-    "title": "공공시설 스마트 관제장비 구매 및 설치",
-    "agency": "나라장터 · 물품 예시",
-    "category": "물품·장비",
-    "deadline": "2026-12-08",
-    "budget_text": "배정예산 예시 5억 원",
-    "max_grant_amount": 454545454,
-    "gov_ratio": 1,
-    "cash_ratio": 0,
-    "summary_3lines": [
-      "공공시설에 관제 장비를 공급하고 설치하는 물품 입찰 예시입니다.",
-      "장비 구매와 현장 설치 용역을 포함하는 상황을 가정합니다.",
-      "실제 납품 규격과 입찰 방식은 나라장터의 해당 공고에서 확인하세요."
-    ],
-    "source_url": "https://www.g2b.go.kr/",
-    "created_at": "2026-11-08",
-    "is_demo": true,
-    "source_is_listing": true
   }
 ]
