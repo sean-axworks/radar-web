@@ -21,7 +21,7 @@ REVIEWED = {
         "text_sha256": "e11ae3ad5716917e1c97838a86a32d29981ef949bfabe8ba61077a38881f9f30",
         "gov_ratio": 0.5, "cash_ratio": 0.5,
         "evidence": "지방비는 국비 대비 1:1 이상 매칭하며, 이 중 현금 50% 이상 매칭 필수",
-        "source_url": "https://www.khidi.or.kr/board/view?linkId=48951948&menuId=MENU01484",
+        "source_url": "https://www.khidi.or.kr/board/view?linkId=48951946&menuId=MENU01108",
     },
 }
 

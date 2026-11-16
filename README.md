@@ -78,11 +78,11 @@ JSON의 `gov_ratio`는 지원금/총사업비, `cash_ratio`는 현금 최소액/
 검토한 원문 근거는 코드의 `REVIEWED`에 공고 ID·저장문구 SHA-256 일치 조건과 함께 기록합니다.
 
 - `k-startup-179682`: ‘총 5,000만 원 상당의 공간 맞춤형 방탈출 게임을 무상으로 제작해 드립니다.’
-  ([원문](https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179682)).
+  ([원문](https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179682)).
   저장 요약의 ‘무상 제작하는 민간 사업’과 사용자가 확인한 자부담 없음에 따라
   지원비율 1, 현금비율 0을 적용합니다. 현금 지급이 아닌 현물 제작 지원입니다.
 - `khidi-48951946`: ‘지방비는 국비 대비 1:1 이상 매칭하며, 이 중 현금 50% 이상 매칭 필수’
-  ([동일 공고 공식 게시문](https://www.khidi.or.kr/board/view?linkId=48951948&menuId=MENU01484)).
+  ([동일 공고 공식 게시문](https://www.khidi.or.kr/board/view?linkId=48951946&menuId=MENU01108)).
   최소 매칭 시나리오로 국비/총사업비 0.5, 지방비 중 현금 최소비율 0.5를 적용합니다.
   지방비를 더 매칭하면 실제 지원비율은 낮아질 수 있습니다.
 
