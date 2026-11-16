@@ -9,6 +9,7 @@ from contextlib import closing
 from pathlib import Path
 
 from grant_amounts import normalize_grant
+from grant_ratios import normalize_ratios
 from sync_notices import atomic_write, git, read_rows
 
 
@@ -20,13 +21,15 @@ def main():
         connection.execute('BEGIN IMMEDIATE')
         path = Path('data/grants.json')
         rows = read_rows(path.read_text(encoding='utf-8'))
-        normalized = [normalize_grant(row) for row in rows]
-        changed = [{'id': b['id'], 'amount': b['max_grant_amount']} for a,b in zip(rows,normalized) if a != b]
+        normalized = [normalize_ratios(normalize_grant(row)) for row in rows]
+        changed = [{'id': b['id'], 'amount': b['max_grant_amount'], 'gov_ratio': b['gov_ratio'], 'cash_ratio': b['cash_ratio']} for a,b in zip(rows,normalized) if a != b]
         if changed:
             atomic_write(path, (json.dumps(normalized,ensure_ascii=False,indent=2)+'\n').encode('utf-8'))
         connection.rollback()
     print(json.dumps({'total':len(rows),'before':sum(r.get('max_grant_amount') is not None for r in rows),
-                      'after':sum(r.get('max_grant_amount') is not None for r in normalized),'changed':changed},ensure_ascii=False))
+                      'after':sum(r.get('max_grant_amount') is not None for r in normalized),
+                      'ratios_before': {k:sum(r.get(k) is not None for r in rows) for k in ('gov_ratio','cash_ratio')},
+                      'ratios_after': {k:sum(r.get(k) is not None for r in normalized) for k in ('gov_ratio','cash_ratio')},'changed':changed},ensure_ascii=False))
 
 
 if __name__ == '__main__':

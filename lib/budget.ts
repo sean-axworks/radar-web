@@ -54,11 +54,18 @@ export function calculateBudget(input: BudgetInputs): BudgetResult {
   const directBase = input.directBase.trim() ? won(input.directBase) : null;
 
   if (amount === null) return { values: null, error: "사업비를 원 단위의 0 이상 정수로 입력하세요." };
+  const missingRates = ([
+    ["government", "지원비율"], ["cash", "민간현금비율"],
+    ["labor", "인건비 비중"], ["indirect", "간접비율"],
+  ] as const).filter(([key]) => !input[key].trim()).map(([, label]) => label);
+  if (missingRates.length) {
+    return { values: null, error: `${missingRates.join("·")}을 입력하세요. 공고에서 확인하거나 비율 가정을 선택해 비교 계산할 수 있습니다.` };
+  }
   if (govRate === null || cashRate === null || laborRate === null || indirectRate === null) {
     return { values: null, error: "비율은 0~100% 범위에서 소수점 둘째 자리까지 입력하세요." };
   }
   if (input.mode === "government" && govRate === 0n) {
-    return { values: null, error: "정부지원금 기준에서는 0%보다 큰 정부지원비율을 입력하세요." };
+    return { values: null, error: "지원금 기준에서는 0%보다 큰 지원비율을 입력하세요." };
   }
   const total = input.mode === "total" ? amount : ceilDivide(amount * rateScale, govRate);
   if (total > BigInt(Number.MAX_SAFE_INTEGER)) {
@@ -85,4 +92,9 @@ export function calculateBudget(input: BudgetInputs): BudgetResult {
       indirect: directBase === null ? null : Number(directBase * indirectRate / rateScale),
     },
   };
+}
+
+// These are user-selected comparison assumptions, never source notice data.
+export function applyRatioScenario(input: BudgetInputs, government: "100" | "70" | "50"): BudgetInputs {
+  return { ...input, government, cash: government === "100" ? "0" : input.cash.trim() || "10" };
 }

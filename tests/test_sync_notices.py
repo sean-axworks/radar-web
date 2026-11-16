@@ -114,3 +114,9 @@ class WebSyncTest(unittest.TestCase):
         self.assertEqual(published["max_grant_amount"], 50000000)
         self.assertIsNone(published["gov_ratio"])
         self.assertIsNone(published["cash_ratio"])
+
+    def test_incoming_explicit_ratios_normalized_without_overwriting_values(self):
+        incoming={**self.row, 'budget_text':'정부지원 70%, 민간부담금 중 현금 10% 이상'}
+        self.assertEqual(self.sync([incoming])['pushed'],1)
+        published=json.loads(self.data.read_text(encoding='utf-8'))[0]
+        self.assertEqual((published['gov_ratio'],published['cash_ratio']),(0.7,0.1))

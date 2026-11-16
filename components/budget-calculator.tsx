@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Calculator, Download, Info } from "lucide-react";
 import { trackCalculatorUse, trackEvent } from "@/lib/analytics";
-import { calculateBudget, disclaimer, vatNote, type BudgetInputs } from "@/lib/budget";
+import { applyRatioScenario, calculateBudget, disclaimer, vatNote, type BudgetInputs } from "@/lib/budget";
 
 const formatter = new Intl.NumberFormat("ko-KR");
 const displayWon = (value: number) => `${formatter.format(value)}원`;
@@ -61,6 +61,11 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
     }));
   }
 
+  function applyScenario(government: "100" | "70" | "50") {
+    hasEditedInput.current = true;
+    setInput((current) => applyRatioScenario(current, government));
+  }
+
   async function exportWorkbook() {
     if (!values || exporting) return;
     trackEvent("excel_download", {
@@ -86,7 +91,7 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
       {preset && <p className="calculator-note">
         {preset.bid
           ? "부가세 제외 추정가격이 확인되면 총사업비에 적용합니다. 지원비율 100%·현금비율 0%는 비교 계산용 가정입니다."
-          : "확인된 지원금 상한과 부담 비율을 기본값으로 적용했습니다. 빈 항목은 공고 원문을 확인해 입력하세요."}
+          : "확인된 지원금 상한과 부담 비율을 기본값으로 적용했습니다. 현물·민간 지원도 지원금으로 표시합니다. 빈 항목은 원문을 확인해 입력하세요."}
       </p>}
       <div className="calculator-grid">
         <div className="card calculator-panel">
@@ -95,17 +100,28 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
             <legend>입력 기준</legend>
             <div className="mode-switch">
               <label><input type="radio" name={headingId} checked={input.mode === "total"} onChange={() => changeMode("total")} />총사업비 기준</label>
-              <label><input type="radio" name={headingId} checked={input.mode === "government"} onChange={() => changeMode("government")} />정부지원금 기준</label>
+              <label><input type="radio" name={headingId} checked={input.mode === "government"} onChange={() => changeMode("government")} />지원금 기준</label>
             </div>
           </fieldset>
           <label className="field">
-            <span>{input.mode === "total" ? "총사업비" : "정부지원금"}</span>
+            <span>{input.mode === "total" ? "총사업비" : "지원금"}</span>
             <span className="input-wrap"><input inputMode="numeric" value={input.amount}
               onChange={(event) => update("amount", event.target.value)} aria-describedby={error ? errorId : undefined} /><span>원</span></span>
           </label>
+          <div className="ratio-scenarios" role="group" aria-label="비율 가정으로 비교 계산">
+            <p className="field-help">비율 가정으로 비교 계산 (공고 확정 조건 아님)</p>
+            <div className="flex flex-wrap gap-2">
+            {(["100", "70", "50"] as const).map((rate) => (
+              <button className="button button-outline" key={rate} type="button" onClick={() => applyScenario(rate)}>
+                {rate === "100" ? "지원 100%" : `지원 ${rate} : 부담 ${100 - Number(rate)}`}
+              </button>
+            ))}
+            </div>
+            <p className="field-help">지원 100%는 현금부담 0원입니다. 나머지는 현금비율 미입력 시 민간부담금의 10%를 가정하며, 입력된 현금비율은 유지합니다.</p>
+          </div>
           <div className="rate-grid">
             {([
-              ["government", "정부지원비율"],
+              ["government", "지원비율"],
               ["cash", "민간현금비율"],
               ["labor", "인건비 비중"],
               ["indirect", "간접비율"],
@@ -122,9 +138,9 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
             <span className="input-wrap"><input inputMode="numeric" placeholder="공고 기준 직접비" value={input.directBase}
               onChange={(event) => update("directBase", event.target.value)} /><span>원</span></span>
           </label>
-          <p className="field-help">민간현금비율은 민간부담금 대비입니다. 간접비율 5%는 예시이며, 공고에 따른 직접비와 비율을 입력하세요.</p>
+          <p className="field-help">민간현금비율은 민간부담금(지방비 등 대응부담 포함) 대비입니다. 간접비율 5%는 예시이며, 공고에 따른 직접비와 비율을 입력하세요.</p>
           {error && <p id={errorId} className="field-error" role="status">{error}</p>}
-          {exceedsCap && <p className="field-error" role="status">정부지원금이 공고 상한 {displayWon(cap)}을 초과합니다.</p>}
+          {exceedsCap && <p className="field-error" role="status">지원금이 공고 상한 {displayWon(cap)}을 초과합니다.</p>}
         </div>
         <div className="card calculator-panel result-panel">
           <h3>계산 결과</h3>
@@ -134,7 +150,7 @@ export function BudgetCalculator({ preset }: { preset?: Preset }) {
           </div>
           <dl className="result-list">
             {([
-              ["정부지원금", values?.government],
+              ["지원금", values?.government],
               ["민간부담금", values?.privateTotal],
               ["민간현금 최소액", values?.cash],
               ["민간현물", values?.inKind],

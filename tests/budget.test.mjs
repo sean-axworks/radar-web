@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { calculateBudget } from "../lib/budget.ts";
+import { applyRatioScenario, calculateBudget } from "../lib/budget.ts";
 
 const inputs = {
   mode: "total",
@@ -47,4 +47,24 @@ test("accepts zero government support when the amount is the total", () => {
   assert.equal(values.government, 0);
   assert.equal(values.cash, 100000000);
   assert.equal(values.inKind, 0);
+});
+
+test("reports exactly which financing fields are missing", () => {
+  const result = calculateBudget({ ...inputs, government: "", cash: "" });
+  assert.equal(result.values, null);
+  assert.match(result.error, /지원비율·민간현금비율을 입력/);
+});
+
+test("user-selected full support calculates inkind support with no cash burden", () => {
+  const unknown = { ...inputs, mode: "government", amount: "50000000", government: "", cash: "", directBase: "" };
+  assert.equal(calculateBudget(unknown).values, null);
+  const selected = applyRatioScenario(unknown, "100");
+  const { values } = calculateBudget(selected);
+  assert.equal(values.total, 50000000);
+  assert.equal(values.government, 50000000);
+  assert.equal(values.cash, 0);
+  assert.equal(unknown.government, "");
+  assert.equal(unknown.cash, "");
+  assert.equal(applyRatioScenario(unknown, "70").cash, "10");
+  assert.equal(applyRatioScenario({ ...unknown, cash: "50" }, "50").cash, "50");
 });

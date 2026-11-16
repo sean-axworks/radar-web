@@ -10,7 +10,9 @@ export type Notice = {
   deadline: string | null;
   budget_text: string;
   max_grant_amount: number | null;
+  /** 지원금 / 총사업비: 0~1 분수 (민간·현물 지원 포함). */
   gov_ratio: number | null;
+  /** 현금 최소액 / 민간부담금(지방비 등 대응부담 포함): 0~1 분수. */
   cash_ratio: number | null;
   summary_3lines: string[];
   source_url: string;

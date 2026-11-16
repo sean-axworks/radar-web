@@ -13,8 +13,10 @@ from pathlib import Path
 
 try:
     from .grant_amounts import normalize_grant
+    from .grant_ratios import normalize_ratios
 except ImportError:  # Direct script invocation by both bots.
     from grant_amounts import normalize_grant
+    from grant_ratios import normalize_ratios
 
 MESSAGE = "chore: daily radar update"
 DATASETS = ("grants", "bids")
@@ -108,7 +110,7 @@ def update_checkout(connection, kind, upstream):
     original = path.read_bytes()
     existing = read_rows(original.decode("utf-8"))
     if kind == "grants":
-        pending = [normalize_grant(row) for row in pending]
+        pending = [normalize_ratios(normalize_grant(row)) for row in pending]
     combined = merge_rows(existing, pending)
     if combined != existing:
         content = (json.dumps(combined, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
