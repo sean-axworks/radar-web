@@ -47,3 +47,18 @@ GrantRadar와 BidRadar의 로컬 `.env`에서 `RADAR_WEB_DIR`에 이 저장소�
 - Vercel 프로젝트의 **Analytics**에서 Web Analytics를 활성화하면 방문과 페이지뷰를 확인할 수 있습니다.
 - GA4는 웹 데이터 스트림의 측정 ID `G-…`를 Vercel의 `NEXT_PUBLIC_GA_ID`에 추가한 뒤 재배포하면 시작됩니다. 로컬에서는 `.env.local`에 같은 변수를 설정할 수 있습니다.
 - GA4에서 `calculator_used`는 유효한 입력 변경 후 계산기별·탭 세션별 한 번, `excel_download`는 내보내기 클릭 시점, `source_link_click`은 공고 원문이나 텔레그램 채널 링크 클릭 시 기록합니다.
+
+
+## 지원금액 정규화
+
+`tools/grant_amounts.py`는 봇의 신규 지원사업 JSON을 웹에 반영할 때
+`budget_text`에서 누락된 `max_grant_amount`만 보완합니다. 기존 숫자와
+`gov_ratio`, `cash_ratio`는 유지합니다. 원·만·백만·천만·억 단위와 범위 상한을
+처리하며, 기관/과제/개소당 금액을 전체 배정액보다 우선합니다.
+총액을 모집 수로 나누지 않고, 쿠폰·상품권·임대료·보증금 등은 제외합니다.
+현물 지원액과 조건부/추정 상한도 원문 설명을 그대로 남긴 계산기 입력값이며,
+현금 지급 확정액을 의미하지 않습니다.
+
+기존 데이터의 누락값은 저장소 루트에서 `python -B tools/normalize_grants.py`로
+같은 파서를 적용합니다. 봇과 동일한 SQLite writer lock을 잡고 로컬 JSON만
+수정하며 커밋·푸시는 하지 않습니다. 재실행은 멱등적입니다.

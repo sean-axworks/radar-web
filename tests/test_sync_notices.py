@@ -106,3 +106,11 @@ class WebSyncTest(unittest.TestCase):
         # Return the disposable fixture to its upstream tip.
         self.git(self.site, "reset", "--hard", "origin/main")
         self.assertEqual(self.sync([])["pushed"], 1)
+
+    def test_incoming_grant_is_normalized_before_publish(self):
+        incoming = {**self.row, "budget_text": "연구비 5,000만 원"}
+        self.assertEqual(self.sync([incoming])["pushed"], 1)
+        published = json.loads(self.data.read_text(encoding="utf-8"))[0]
+        self.assertEqual(published["max_grant_amount"], 50000000)
+        self.assertIsNone(published["gov_ratio"])
+        self.assertIsNone(published["cash_ratio"])

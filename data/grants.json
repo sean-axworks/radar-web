@@ -24,7 +24,7 @@
     "category": "사업화지원",
     "deadline": null,
     "budget_text": "과제당 총 2천만 원 내외, 공급기업이 100% 사용하며 중간점검 결과에 따라 순차 지급",
-    "max_grant_amount": null,
+    "max_grant_amount": 20000000,
     "gov_ratio": null,
     "cash_ratio": null,
     "summary_3lines": [
@@ -60,7 +60,7 @@
     "category": "사업화지원",
     "deadline": "2026-11-30T23:59:00+09:00",
     "budget_text": "총 5,000만 원 상당 현물 지원: 게임 제작 3,000만 원, 라이선스·홍보 2,000만 원",
-    "max_grant_amount": null,
+    "max_grant_amount": 50000000,
     "gov_ratio": null,
     "cash_ratio": null,
     "summary_3lines": [
@@ -276,7 +276,7 @@
     "category": "R&D",
     "deadline": null,
     "budget_text": "연구비 5,000만 원(조정 가능)",
-    "max_grant_amount": null,
+    "max_grant_amount": 50000000,
     "gov_ratio": null,
     "cash_ratio": null,
     "summary_3lines": [
@@ -312,7 +312,7 @@
     "category": "인력양성",
     "deadline": "2026-09-30T15:00:00+09:00",
     "budget_text": "총 6억 원 이내, 4개 기관에 기관당 1.5억 원 이내",
-    "max_grant_amount": null,
+    "max_grant_amount": 150000000,
     "gov_ratio": null,
     "cash_ratio": null,
     "summary_3lines": [
@@ -348,7 +348,7 @@
     "category": "인력양성",
     "deadline": null,
     "budget_text": "1개 교육기관 선정, 사업예산 약 1.5억~2억 원 예상(기수별 연수 확정인원 및 협의에 따라 변동)",
-    "max_grant_amount": null,
+    "max_grant_amount": 200000000,
     "gov_ratio": null,
     "cash_ratio": null,
     "summary_3lines": [
@@ -366,7 +366,7 @@
     "category": "인력양성",
     "deadline": null,
     "budget_text": "총 25억원, 총 2개소에 개소당 연 최대 12.5억원 지원",
-    "max_grant_amount": null,
+    "max_grant_amount": 1250000000,
     "gov_ratio": null,
     "cash_ratio": null,
     "summary_3lines": [
@@ -600,7 +600,7 @@
     "category": "사업화지원",
     "deadline": "2026-11-27T18:00:00+09:00",
     "budget_text": "2개사 내외 모집, 창업공간 및 집기 무상 제공, 선택형 사업화 자금 최대 500만 원",
-    "max_grant_amount": null,
+    "max_grant_amount": 5000000,
     "gov_ratio": null,
     "cash_ratio": null,
     "summary_3lines": [
