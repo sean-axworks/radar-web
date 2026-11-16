@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: { default: "Radar | 국책과제·공공입찰 통합 포털", template: "%s | Radar" },
   description: "국책과제와 공공입찰 공고를 한곳에서 확인하고 사업비를 계산하세요.",
   icons: { icon: "/radar.svg" },
+  verification: { google: "D89d0Sc6G9cAQfywOxk-vFmxchGdvBQ98S8aYVCp27o" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
