@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: "국책과제와 공공입찰 공고를 한곳에서 확인하고 사업비를 계산하세요.",
   icons: { icon: "/radar.svg" },
   verification: { google: "D89d0Sc6G9cAQfywOxk-vFmxchGdvBQ98S8aYVCp27o" },
+  other: { "naver-site-verification": "3c439b104e9121e122c4a0eb8dd2e25f6459ccae" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
