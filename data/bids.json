@@ -1,5 +1,59 @@
 [
   {
+    "id": "koneps-r26bk01836095",
+    "title": "2027년 재단 정보시스템 통합 유지관리 사업 ",
+    "agency": "경기신용보증재단",
+    "category": "용역·정보화",
+    "deadline": "2026-12-08T10:00:00+09:00",
+    "budget_text": "배정예산 5,558,724,000원",
+    "max_grant_amount": 5053385455,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "재단 정보시스템 통합 유지관리",
+      "공고문 확인 필요",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01836095&bidPbancOrd=000",
+    "created_at": "2026-11-17T14:37:32+09:00"
+  },
+  {
+    "id": "koneps-r26bk01835789",
+    "title": "(수의시담) 2026년 정보시스템 유지관리 용역(2026-2028)",
+    "agency": "대한적십자사 혈액관리본부",
+    "category": "용역·정보화",
+    "deadline": "2026-11-18T14:00:00+09:00",
+    "budget_text": "배정예산 6,295,731,000원",
+    "max_grant_amount": 5723391818,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "2026~2028년 정보시스템 유지관리 용역",
+      "정보통신공사업 및 소프트웨어사업자(컴퓨터관련서비스사업) 등록 요건의 선택·동시 충족 관계는 공고문 확인 필요; 공동수급 불허",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01835789&bidPbancOrd=000",
+    "created_at": "2026-11-17T14:59:38+09:00"
+  },
+  {
+    "id": "koneps-r26bk01821463",
+    "title": "항만자동화 테스트베드 AI 통합운영시스템(TOS) 구축 및 최적화 용역",
+    "agency": "여수광양항만공사",
+    "category": "용역·정보화",
+    "deadline": "2026-12-18T14:00:00+09:00",
+    "budget_text": "배정예산 11,774,950,000원",
+    "max_grant_amount": 10704500000,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "항만자동화 테스트베드 AI 통합운영시스템(TOS) 구축 및 최적화",
+      "제한경쟁, 소프트웨어사업자(컴퓨터관련서비스사업, 1468), 전자 공동이행",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01821463&bidPbancOrd=000",
+    "created_at": "2026-11-17T15:34:50+09:00"
+  },
+  {
     "id": "koneps-r26bk01832716",
     "title": "강원후평 스마트그린산업단지 통합관제센터 구축사업 산업단지 방범 및 센터시스템 구축용역",
     "agency": "디토닉 주식회사",
