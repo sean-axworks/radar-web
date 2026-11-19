@@ -52,8 +52,10 @@ class WebSyncTest(unittest.TestCase):
 
     def sync(self, rows):
         result = subprocess.run([sys.executable, str(SCRIPT), "grants"], cwd=self.site,
-                                input=json.dumps(rows), capture_output=True, text=True, check=True)
-        return json.loads(result.stdout)
+                                input=json.dumps(rows), capture_output=True, text=True, check=False)
+        outcome = json.loads(result.stdout)
+        self.assertEqual(result.returncode, 0 if outcome["status"] == "ok" else 1, result.stderr)
+        return outcome
 
     def test_prepends_once_and_preserves_existing_rows(self):
         self.assertEqual(self.sync([self.row, self.row])["pushed"], 1)

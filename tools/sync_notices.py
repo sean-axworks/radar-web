@@ -23,12 +23,23 @@ DATASETS = ("grants", "bids")
 DATA_PATHS = {f"data/{kind}.json" for kind in DATASETS}
 
 
+class GitError(RuntimeError):
+    def __init__(self, command, result):
+        self.returncode = result.returncode
+        self.stderr = result.stderr
+        super().__init__(f"git {command} exit {result.returncode}\n{result.stderr}")
+
+
 def git(*args):
     env = {**os.environ, "GIT_TERMINAL_PROMPT": "0", "GCM_INTERACTIVE": "Never"}
     result = subprocess.run(["git", *args], capture_output=True, encoding="utf-8",
-                            errors="replace", env=env, timeout=30, check=False)
+                            errors="replace", env=env, timeout=30, check=False,
+                            stdin=subprocess.DEVNULL,
+                            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     if result.returncode:
-        raise RuntimeError(f"git {args[0]} exit {result.returncode}")
+        raise GitError(args[0], result)
+    if result.stderr:
+        print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
     return result.stdout.strip()
 
 
@@ -103,7 +114,7 @@ def update_checkout(connection, kind, upstream):
     if not ahead and local_head != upstream_head:
         git("merge", "--ff-only", upstream)
     elif ahead and git("merge-base", upstream, "HEAD") != upstream_head:
-        raise ValueError("Local updates diverged from origin/main")
+        git("rebase", upstream)
     pending = [json.loads(row[0]) for row in connection.execute(
         "SELECT payload FROM queue WHERE kind = ? ORDER BY rowid DESC", (kind,)
     )]
@@ -124,7 +135,18 @@ def update_checkout(connection, kind, upstream):
                 git("reset", "--", path.as_posix())
             raise
     if git("rev-parse", "HEAD") != git("rev-parse", upstream):
-        git("push", "origin", "HEAD:refs/heads/main")
+        for attempt in range(3):
+            try:
+                git("push", "origin", "HEAD:refs/heads/main")
+                break
+            except GitError as error:
+                print(f"Push attempt {attempt + 1}/3 failed ({error})", file=sys.stderr)
+                # Only a confirmed non-fast-forward rejection is safe to retry.
+                if (attempt == 2 or error.returncode not in {1, 128}
+                        or not any(marker in error.stderr for marker in ("[rejected]", "non-fast-forward"))):
+                    raise
+                git("fetch", "origin", "main")
+                git("rebase", upstream)
 
 
 def sync(kind, rows):
@@ -167,7 +189,10 @@ if __name__ == "__main__":
     if len(sys.argv) != 2 or sys.argv[1] not in DATASETS:
         sys.exit("Usage: sync_notices.py grants|bids")
     try:
-        print(json.dumps(sync(sys.argv[1], read_rows(sys.stdin.read()))))
+        outcome = sync(sys.argv[1], read_rows(sys.stdin.read()))
+        print(json.dumps(outcome))
     except (OSError, ValueError, RuntimeError, sqlite3.Error, subprocess.TimeoutExpired) as error:
-        print(f"Web sync failed ({type(error).__name__})", file=sys.stderr)
-        print(json.dumps({"pushed": 0, "status": "failed"}))
+        print(f"Web sync failed ({type(error).__name__}: {error})", file=sys.stderr)
+        outcome = {"pushed": 0, "status": "failed"}
+        print(json.dumps(outcome))
+    sys.exit(0 if outcome["status"] == "ok" else 1)
