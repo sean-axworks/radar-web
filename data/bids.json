@@ -1,5 +1,41 @@
 [
   {
+    "id": "koneps-r26bk01847144",
+    "title": "2027년 발신번호 거짓표시대응 시스템(응용SW) 유지보수",
+    "agency": "한국인터넷진흥원",
+    "category": "용역·정보화",
+    "deadline": null,
+    "budget_text": "배정예산 96,000,000원",
+    "max_grant_amount": 87272727,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "발신번호 거짓표시대응 시스템(응용SW) 유지보수",
+      "공고문 확인 필요",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01847144&bidPbancOrd=000",
+    "created_at": "2026-11-23T08:20:14+09:00"
+  },
+  {
+    "id": "koneps-r26bk01843726",
+    "title": "보령시 인구감소 대응 데이터실증 플랫폼 구축(용역)",
+    "agency": "충청남도 보령시",
+    "category": "용역·정보화",
+    "deadline": "2026-12-22T10:00:00+09:00",
+    "budget_text": "배정예산 1,171,053,720원",
+    "max_grant_amount": 1055909091,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "보령시 인구감소 대응 데이터실증 플랫폼 구축",
+      "소프트웨어사업자(컴퓨터관련서비스사업, 1468)",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01843726&bidPbancOrd=000",
+    "created_at": "2026-11-22T14:51:44+09:00"
+  },
+  {
     "id": "koneps-r26bk01846370",
     "title": "디지털서비스_아이티센클로잇_아이티센클로잇 중개서비스 for Amazon Web Services(IaaS)",
     "agency": "각 수요기관",
