@@ -1,5 +1,59 @@
 [
   {
+    "id": "koneps-r26bk01853723",
+    "title": "2027년 ~ 2031년 소방정보시스템 유지보수 용역",
+    "agency": "대전광역시",
+    "category": "용역·정보화",
+    "deadline": "2026-12-15T10:00:00+09:00",
+    "budget_text": "배정예산 3,926,100,000원",
+    "max_grant_amount": 3569181818,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "소방정보시스템 유지보수 용역",
+      "제한경쟁, 전자입찰, 공동이행 가능. 정보통신공사업과 소프트웨어사업자(컴퓨터관련서비스사업)의 충족 관계는 공고문 확인 필요",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01853723&bidPbancOrd=001",
+    "created_at": "2026-11-25T09:35:31+09:00"
+  },
+  {
+    "id": "koneps-r26bk01854879",
+    "title": "2027년 관세정보시스템 유지관리 사업",
+    "agency": "한국관세정보원",
+    "category": "용역·정보화",
+    "deadline": "2026-12-09T10:00:00+09:00",
+    "budget_text": "배정예산 8,237,669,480원",
+    "max_grant_amount": 7446363636,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "2027년 관세정보시스템 유지관리",
+      "정보통신공사업(0036), 소프트웨어사업자(컴퓨터관련서비스사업, 1468) 요건의 적용 관계는 공고문 확인 필요",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01854879&bidPbancOrd=000",
+    "created_at": "2026-11-25T14:51:12+09:00"
+  },
+  {
+    "id": "koneps-r26bk01851504",
+    "title": "상용SW 제3자단가(커스터마이징)(Repia Search5_레피아)",
+    "agency": "각 수요기관",
+    "category": "용역·정보화",
+    "deadline": "2026-11-26T12:00:00+09:00",
+    "budget_text": "배정예산 18,912,500,000원",
+    "max_grant_amount": 17193181818,
+    "gov_ratio": 1,
+    "cash_ratio": 0,
+    "summary_3lines": [
+      "Repia Search5 상용 SW 제3자단가 계약 및 커스터마이징",
+      "공고문 확인 필요",
+      "공고문 확인 필요"
+    ],
+    "source_url": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01851504&bidPbancOrd=000",
+    "created_at": "2026-11-25T09:35:57+09:00"
+  },
+  {
     "id": "koneps-r26bk01822449",
     "title": "AI 기반 외신 빅데이터 분석 플랫폼 운영 및 유지보수",
     "agency": "문화체육관광부",
