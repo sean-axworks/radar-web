@@ -1,5 +1,131 @@
 [
   {
+    "id": "k-startup-179857",
+    "title": "2026년 보건의료 빅데이터 미래포럼",
+    "agency": "건강보험심사평가원",
+    "category": "인력양성",
+    "deadline": "2026-12-02T22:00:00+09:00",
+    "budget_text": "참가비 무료; 금전 지원 규모 원문 확인 필요",
+    "max_grant_amount": null,
+    "gov_ratio": null,
+    "cash_ratio": null,
+    "summary_3lines": [
+      "건강보험심사평가원이 보건의료 AX와 데이터 활용을 주제로 미래포럼을 개최합니다.",
+      "행사는 2026년 12월 3일 14:00~17:10에 서울 백범김구기념관 컨벤션홀에서 열리며 참가비는 무료입니다.",
+      "관련 연구자·전문가와 일반 국민 등이 온라인으로 신청할 수 있으며, 선착순으로 접수합니다."
+    ],
+    "source_url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179857",
+    "created_at": "2026-11-20"
+  },
+  {
+    "id": "k-startup-179880",
+    "title": "스담스담 13회차 참석자 모집",
+    "agency": "(재)경기도경제과학진흥원",
+    "category": "인력양성",
+    "deadline": "2026-12-03T18:00:00+09:00",
+    "budget_text": "무료 강연 및 네트워킹 제공, 간단한 점심 도시락 제공",
+    "max_grant_amount": null,
+    "gov_ratio": null,
+    "cash_ratio": null,
+    "summary_3lines": [
+      "경기도경제과학진흥원이 경기도 내 스타트업을 대상으로 AI 창업과 성장, 빅테크 기업고객 확보 경험을 공유하는 강연을 개최합니다.",
+      "행사는 2026년 12월 4일 12시부터 14시까지 경기스타트업브릿지에서 무료로 진행되며, 기업 간 네트워킹과 점심 도시락이 제공됩니다.",
+      "온라인 신청은 2026년 12월 3일 18시까지이며, 신청서 제출 순으로 참가자를 확정해 개별 안내합니다."
+    ],
+    "source_url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179880",
+    "created_at": "2026-11-24"
+  },
+  {
+    "id": "k-startup-179889",
+    "title": "[알파브라더스] 「2026 충청 스타트업 벤처포럼」 3회차-파트너링 참가 기업 모집",
+    "agency": "알파브라더스",
+    "category": "사업화지원",
+    "deadline": "2026-12-10T00:00:00+09:00",
+    "budget_text": "현금 지원 규모 원문 확인 필요; IR 피칭, 리버스 피칭 및 투자사·대중견기업 1:1 밋업 제공",
+    "max_grant_amount": null,
+    "gov_ratio": null,
+    "cash_ratio": null,
+    "summary_3lines": [
+      "AI·반도체·디스플레이·자동차 등 충청권 주력산업 분야 창업기업과 투자사 및 대·중견기업의 협업과 사업 연계를 위한 행사입니다.",
+      "투자 및 오픈이노베이션에 관심 있는 전국 기업과 관계자를 선착순 모집하며, 충청남도 소재 기업과 예비·초기 창업자 및 해당 주력산업 분야를 우대합니다.",
+      "행사는 2026년 12월 11일 호서대학교 아산캠퍼스에서 열리며, IR 피칭과 대·중견기업 리버스 피칭, 투자사 및 대·중견기업과의 1:1 밋업이 진행됩니다."
+    ],
+    "source_url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179889",
+    "created_at": "2026-11-25"
+  },
+  {
+    "id": "k-startup-179903",
+    "title": "「유니콘 랩(U-Lab) 대구」2026년 3차 입주기업 모집 공고",
+    "agency": "대구창조경제혁신센터",
+    "category": "사업화지원",
+    "deadline": "2026-12-10T16:00:00+09:00",
+    "budget_text": "개별입주실 8인실 7개·4인실 1개, 공용입주실 1인석 11개 모집. 월 보육료는 각각 60만 원·30만 원·10만 원이며 부가세 별도.",
+    "max_grant_amount": null,
+    "gov_ratio": null,
+    "cash_ratio": null,
+    "summary_3lines": [
+      "대구창조경제혁신센터가 핀테크·AI·빅데이터·블록체인 등 기술 기반 창업 생태계 조성을 위해 유니콘 랩 대구 입주기업을 모집한다.",
+      "입주기간은 계약일부터 최대 2027년 12월 31일까지이며, 공간 이용료와 보증금은 입주 유형별로 부과된다.",
+      "입주기업에는 맞춤형 멘토링과 액셀러레이팅, 네트워킹, 공용 공간 무료 대관 및 센터 지원사업 연계가 제공된다."
+    ],
+    "source_url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179903",
+    "created_at": "2026-11-26"
+  },
+  {
+    "id": "k-startup-179904",
+    "title": "2026년 시흥 R-AI-S-E 워케이션 참가자 모집",
+    "agency": "조슈아파트너스 주식회사",
+    "category": "사업화지원",
+    "deadline": "2026-12-02T23:59:00+09:00",
+    "budget_text": "20명 모집, 숙박·식사·거점오피스 및 체험 프로그램 제공; 금액 환산 규모는 원문 확인 필요",
+    "max_grant_amount": null,
+    "gov_ratio": null,
+    "cash_ratio": null,
+    "summary_3lines": [
+      "시흥에서 AI·산학협력 인프라 탐방과 첨단산업 관계자 네트워킹을 결합한 워케이션 참가자 20명을 모집합니다.",
+      "시흥시 외 지역의 첨단산업 종사자와 창업가를 대상으로 하며, AI·로봇 관련 인증·지식재산권 또는 사업 수행 실적 등을 보유한 기업이 신청 대상입니다.",
+      "숙박과 일부 식사, 거점오피스, 웰컴키트 및 선택형 체험 프로그램을 제공하며, 온라인 접수는 2026년 12월 2일 23시 59분까지입니다."
+    ],
+    "source_url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179904",
+    "created_at": "2026-11-26"
+  },
+  {
+    "id": "k-startup-179905",
+    "title": "2026년 제2차 공간정보 창업지원센터 입주기업 모집공고",
+    "agency": "한국국토정보공사",
+    "category": "사업화지원",
+    "deadline": "2026-12-13T23:59:00+09:00",
+    "budget_text": "1개 기업에 6인실 입주공간 약 9평 전액 무상 제공",
+    "max_grant_amount": null,
+    "gov_ratio": null,
+    "cash_ratio": null,
+    "summary_3lines": [
+      "한국국토정보공사가 공간정보 우수기술 또는 아이디어를 보유한 창업기업 1곳을 모집한다.",
+      "선정 기업에는 판교 소재 6인실 입주공간을 관리비와 임차료 없이 제공하고, 전시회 참가·투자유치·마케팅 등을 지원한다.",
+      "입주기간은 2027년 1월 1일부터 7월 31일까지이며, 평가는 제출서류를 기반으로 한 발표와 질의로 진행된다."
+    ],
+    "source_url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179905",
+    "created_at": "2026-11-26"
+  },
+  {
+    "id": "k-startup-179906",
+    "title": "2026년 하반기 양주시 스타트업 성장 지원센터 입주기업 모집",
+    "agency": "광운대학교산학협력단",
+    "category": "사업화지원",
+    "deadline": "2026-12-08T13:00:00+09:00",
+    "budget_text": "2인실 1개, 공유 1인실 4개 모집; 임대료 무료, 전기료 실비 부담; 사업화 지원금 규모는 원문 확인 필요",
+    "max_grant_amount": null,
+    "gov_ratio": null,
+    "cash_ratio": null,
+    "summary_3lines": [
+      "양주시 스타트업 성장 지원센터가 첨단기술·국방·IT·푸드테크 분야 창업기업을 대상으로 2인실 1개와 공유 1인실 4개 입주기업을 모집한다.",
+      "입주기간은 계약일부터 2027년 12월 31일까지이며, 임대료는 무료이고 전기료는 실비 정산한다.",
+      "사업화 지원, 교육과 멘토링, 투자·판로 연계 등을 제공하며 이메일 또는 온라인으로 2026년 12월 8일 13시까지 신청할 수 있다."
+    ],
+    "source_url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&id=179906",
+    "created_at": "2026-11-27"
+  },
+  {
     "id": "k-startup-179867",
     "title": "[ 모 집 ] GVC AI LLM API 개발 크레딧 지원 프로그램 – AI 스타트업 및 예비창업자 모집",
     "agency": "글로벌벤처센터",
